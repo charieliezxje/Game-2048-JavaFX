@@ -31,8 +31,8 @@ public class Game2048 extends GridPane {
     setAlignment(Pos.CENTER);
     setStyle("-fx-padding: 10; -fx-background-color: #bbada0;");
 
-    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins-Regular.ttf"), 18);
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins-Bold.ttf"), 30);
+    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 18);
+    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 30);
 
     scoreLabel.setFont(poppinsRegular);
     bestScoreLabel.setFont(poppinsRegular);
@@ -76,7 +76,7 @@ public class Game2048 extends GridPane {
 
   // Create the header (title and scores)
   public HBox getHeader() {
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins-Bold.ttf"), 32);
+    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 32);
 
     // 2048 Title Box
     Label titleLabel = new Label("2048 Game");
@@ -123,7 +123,7 @@ public class Game2048 extends GridPane {
 
   // Create the footer (instruction label)
   public Label getFooter() {
-    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins-Regular.ttf"), 16);
+    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 16);
 
     Label footerLabel = new Label("Join the numbers and get to the 2048 tile!");
     footerLabel.setFont(poppinsRegular);
