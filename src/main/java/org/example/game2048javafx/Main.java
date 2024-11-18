@@ -13,10 +13,12 @@ public class Main extends Application {
     BorderPane root = new BorderPane();
     root.setTop(game.getHeader());    // Add header
     root.setCenter(game);             // Add game grid
-    root.setBottom(game.getFooter()); // Add footer label
+    root.setBottom(game.getFooter()); // Add footer
 
-    Scene scene = new Scene(root, 550, 650);
+    Scene scene = new Scene(root, 550, 700);
     scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm()); // Load CSS
+
+    scene.setOnKeyPressed(event -> game.fireEvent(event)); // Ensure focus remains on grid
 
     primaryStage.setTitle("Play 2048!");
     primaryStage.setScene(scene);

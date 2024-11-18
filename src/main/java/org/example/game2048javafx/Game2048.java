@@ -2,6 +2,7 @@ package org.example.game2048javafx;
 
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,6 +25,8 @@ public class Game2048 extends GridPane {
 
   private final Label scoreLabel = new Label("SCORE: 0");
   private final Label bestScoreLabel = new Label("BEST: 0");
+  private final Label footerLabel = new Label("Join the numbers and get to the 2048 tile!");
+  private final Label gameOverLabel = new Label("Game Over! Try Again?");
 
   public Game2048() {
     setHgap(10);
@@ -36,6 +39,11 @@ public class Game2048 extends GridPane {
 
     scoreLabel.setFont(poppinsRegular);
     bestScoreLabel.setFont(poppinsRegular);
+    footerLabel.setFont(poppinsRegular);
+    footerLabel.setStyle("-fx-text-fill: #776e65;");
+    gameOverLabel.setFont(poppinsBold);
+    gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 24px;");
+    gameOverLabel.setVisible(false);
 
     // Initialize grid tiles
     for (int row = 0; row < SIZE; row++) {
@@ -67,7 +75,7 @@ public class Game2048 extends GridPane {
       }
 
       if (moved) {
-        addRandomTile();
+        addRandomTile(); // Add exactly one tile after a valid move
         updateUIWithAnimations();
         checkGameOver();
       }
@@ -121,28 +129,40 @@ public class Game2048 extends GridPane {
     return header;
   }
 
-  // Create the footer (instruction label)
-  public Label getFooter() {
-    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 16);
+  // Create the footer with buttons
+  public VBox getFooter() {
+    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 18);
 
-    Label footerLabel = new Label("Join the numbers and get to the 2048 tile!");
-    footerLabel.setFont(poppinsRegular);
-    footerLabel.setStyle(
-      "-fx-font-size: 16px; " +
-        "-fx-text-fill: #776e65; " +
-        "-fx-padding: 10; " +
-        "-fx-background-radius: 15;");
-    footerLabel.setAlignment(Pos.CENTER);
-    footerLabel.setMinHeight(50);
-    footerLabel.setMaxWidth(Double.MAX_VALUE);
-    return footerLabel;
+    // New Game Button
+    Button newGameButton = new Button("New Game");
+    newGameButton.setFont(poppinsRegular);
+    newGameButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
+    newGameButton.setOnAction(event -> {
+      startGame();
+      requestFocus(); // Ensure focus returns to the grid after button click
+      gameOverLabel.setVisible(false);
+    });
+
+    // Exit Game Button
+    Button exitGameButton = new Button("Exit Game");
+    exitGameButton.setFont(poppinsRegular);
+    exitGameButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
+    exitGameButton.setOnAction(event -> System.exit(0));
+
+    HBox buttonContainer = new HBox(10, newGameButton, exitGameButton);
+    buttonContainer.setAlignment(Pos.CENTER);
+
+    VBox footer = new VBox(10, footerLabel, gameOverLabel, buttonContainer);
+    footer.setAlignment(Pos.CENTER);
+    footer.setStyle("-fx-padding: 10;");
+    return footer;
   }
 
   // Start the game
   public void startGame() {
     resetBoard();
     addRandomTile();
-    addRandomTile();
+    addRandomTile(); // Always start with exactly two tiles
     updateUI();
   }
 
@@ -247,6 +267,10 @@ public class Game2048 extends GridPane {
       setLine(direction, i, merged);
     }
 
+    if (moved) {
+      updateScores();
+    }
+
     return moved;
   }
 
@@ -289,7 +313,6 @@ public class Game2048 extends GridPane {
       }
     }
 
-    updateScores();
     return merged;
   }
 
@@ -316,6 +339,6 @@ public class Game2048 extends GridPane {
         if (col < SIZE - 1 && board[row][col] == board[row][col + 1]) return; // Mergeable horizontally
       }
     }
-    System.out.println("Game Over!");
+    gameOverLabel.setVisible(true);
   }
 }
