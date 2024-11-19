@@ -2,6 +2,33 @@
 
 This is a JavaFX implementation of the popular **2048 puzzle game**, where the objective is to slide tiles on a grid to combine them into a tile with the value **2048**. This implementation includes animations, styling, and responsive UI design, offering an enjoyable experience for players.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Preview](#preview)
+- [Gameplay](#gameplay)
+- [Objective](#objective)
+- [Controls](#controls)
+- [How It Works](#how-it-works)
+- [Code Structure](#code-structure)
+- [Styling](#styling)
+- [Installation](#installation)
+- [Usage](#usage)
+- [File Structure](#file-structure)
+- [Known Issues](#known-issues)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
+The 2048 game is a single-player sliding block puzzle game where the player combines tiles to create a tile with the value **2048**. The game is played on a 4x4 grid, with tiles that slide in four directions (Up, Down, Left, Right). When two tiles with the same value collide, they merge into a single tile with double the value. The game continues until no valid moves are left.
+
+**Architecture**: The game follows the Model-View-Controller (MVC) pattern, with separate classes for game logic, UI interactions, and rendering. The main class `Game2048` manages the game grid, user inputs, and animations, while the `Main` class initializes the game window and handles event listeners. The game is styled with modern aesthetics, featuring rounded borders, color-coded tiles, and proper alignment of UI elements.
+
+**Technology Stack**: The game is built using JavaFX, a Java library for building rich client applications. It uses FXML for defining the UI layout and CSS for styling the game. The project is managed using Maven, with dependencies for JavaFX and JUnit for testing. Also used CSS for styling the game.
+
 ## Features
 
 - **Interactive Gameplay**: Use arrow keys to move tiles (Up, Down, Left, Right).
