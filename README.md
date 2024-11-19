@@ -53,8 +53,9 @@ Combine tiles with the same value to create a tile with the value **2048** or hi
   - The game checks for possible moves after each action.
   - If no moves are available (all tiles are full and non-mergeable), the game ends.
 
-
 ### Code Structure
+
+The game is built using JavaFX, following Model-View-Controller (MVC) architecture for clean separation of concerns. The key components are:
 
 #### **1. Class: `Game2048`**
 This is the main class responsible for rendering the game grid, handling user inputs, managing the board state, and applying animations.
@@ -96,6 +97,20 @@ Key Components:
 - **JUnit Dependency**:
   - Adds JUnit for testing the game logic.
   - Configures the Maven Surefire plugin for running tests.
+
+#### 4. **Controller, Model, and View Classes**
+These classes follow the MVC pattern for managing game logic, UI interactions, and rendering.
+
+Key Components:
+- **Controller**:
+  - Handles user inputs and game actions.
+  - Updates the model and view based on user interactions.
+- **Model**:
+  - Manages the game state and logic.
+  - Checks for valid moves and game over conditions.
+- **View**:
+  - Renders the game grid and UI elements.
+  - Updates the UI based on the model state.
 
 ### Styling
 
@@ -148,13 +163,18 @@ Color Codes for Tiles:
 
 ## File Structure
 
+The project structure is organized as follows:
+
 ```
 src/
 ├── org.example.game2048javafx/
-│   ├── Game2048.java   # Main game logic and UI
-│   ├── Main.java       # Entry point for the application
-│   └── resources/      # Optional resources like images or stylesheets
-└── README.md           # Comprehensive documentation
+│   ├── Controller.java  # Controller for the game
+│   ├── Model.java       # Model for the game
+│   ├── View.java        # View for the game
+│   ├── Game2048.java    # Main game logic and UI
+│   ├── Main.java        # Entry point for the application
+│   └── resources/       # Optional resources like images or stylesheets
+└── README.md            # Comprehensive documentation
 ```
 
 ## Known Issues
