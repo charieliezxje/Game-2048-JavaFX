@@ -79,6 +79,8 @@ public class Game2048 extends GridPane {
         updateUIWithAnimations();
         checkGameOver();
       }
+
+      event.consume();
     });
   }
 
