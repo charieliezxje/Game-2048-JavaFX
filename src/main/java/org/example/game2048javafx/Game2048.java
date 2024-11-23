@@ -34,15 +34,21 @@ public class Game2048 extends GridPane {
     setAlignment(Pos.CENTER);
     setStyle("-fx-padding: 10; -fx-background-color: #bbada0;");
 
-    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 18);
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 30);
+    Font poppinsRegular =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"),
+            18);
+    Font poppinsBold =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"),
+            30);
 
     scoreLabel.setFont(poppinsRegular);
     bestScoreLabel.setFont(poppinsRegular);
     footerLabel.setFont(poppinsRegular);
-    footerLabel.setStyle("-fx-text-fill: #776e65;");
+    footerLabel.setStyle("-fx-text-fill: #776e65; -fx-font-family: 'Poppins';");
     gameOverLabel.setFont(poppinsBold);
-    gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 24px;");
+    gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 24px; -fx-font-family: 'Poppins';");
     gameOverLabel.setVisible(false);
 
     // Initialize grid tiles
@@ -64,63 +70,70 @@ public class Game2048 extends GridPane {
     }
 
     // Handle key presses
-    setOnKeyPressed(event -> {
-      boolean moved = false;
+    setOnKeyPressed(
+        event -> {
+          boolean moved = false;
 
-      switch (event.getCode()) {
-        case UP -> moved = move("UP");
-        case DOWN -> moved = move("DOWN");
-        case LEFT -> moved = move("LEFT");
-        case RIGHT -> moved = move("RIGHT");
-      }
+          switch (event.getCode()) {
+            case UP -> moved = move("UP");
+            case DOWN -> moved = move("DOWN");
+            case LEFT -> moved = move("LEFT");
+            case RIGHT -> moved = move("RIGHT");
+          }
 
-      if (moved) {
-        addRandomTile(); // Add exactly one tile after a valid move
-        updateUIWithAnimations();
-        checkGameOver();
-      }
+          if (moved) {
+            addRandomTile(); // Add exactly one tile after a valid move
+            updateUIWithAnimations();
+            checkGameOver();
+          }
 
-      event.consume();
-    });
+          event.consume();
+        });
   }
 
   // Create the header (title and scores)
   public HBox getHeader() {
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 32);
+    Font poppinsBold =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"),
+            32);
 
     // 2048 Title Box
     Label titleLabel = new Label("2048 Game");
     titleLabel.setFont(poppinsBold);
     titleLabel.setStyle(
-      "-fx-font-size: 32px; " +
-        "-fx-background-color: #edc22e; " +
-        "-fx-text-fill: white; " +
-        "-fx-padding: 15; " +
-        "-fx-border-radius: 15; " +
-        "-fx-background-radius: 15;");
+        "-fx-font-size: 32px; "
+            + "-fx-background-color: #edc22e; "
+            + "-fx-text-fill: white; "
+            + "-fx-padding: 15; "
+            + "-fx-border-radius: 15; "
+            + "-fx-font-family: 'Poppins'; "
+            + "-fx-background-radius: 15;");
     titleLabel.setAlignment(Pos.CENTER);
     titleLabel.setMinWidth(150);
     titleLabel.setMinHeight(60);
 
     // Score Box
     scoreLabel.setStyle(
-      "-fx-font-size: 18px; " +
-        "-fx-background-color: #eee4da; " +
-        "-fx-text-fill: #333333; " +
-        "-fx-padding: 10; " +
-        "-fx-border-radius: 15; " +
-        "-fx-background-radius: 15;");
+        "-fx-font-size: 20px; "
+            + "-fx-background-color: #eee4da; "
+            + "-fx-text-fill: #333333; "
+            + "-fx-padding: 10; "
+            + "-fx-border-radius: 15; "
+            + "-fx-font-family: 'Poppins'; "
+            + "-fx-background-radius: 15;");
     scoreLabel.setAlignment(Pos.CENTER);
     scoreLabel.setMinWidth(100);
 
     // Best Score Box
     bestScoreLabel.setStyle(
-      "-fx-font-size: 18px; " +
-        "-fx-background-color: #eee4da; " +
-        "-fx-text-fill: #333333; " +
-        "-fx-padding: 10; " +
-        "-fx-border-radius: 15; " +
-        "-fx-background-radius: 15;");
+        "-fx-font-size: 20px; "
+            + "-fx-background-color: #eee4da; "
+            + "-fx-text-fill: #333333; "
+            + "-fx-padding: 10; "
+            + "-fx-border-radius: 15; "
+            + "-fx-font-family: 'Poppins'; "
+            + "-fx-background-radius: 15;");
     bestScoreLabel.setAlignment(Pos.CENTER);
     bestScoreLabel.setMinWidth(100);
 
@@ -133,22 +146,28 @@ public class Game2048 extends GridPane {
 
   // Create the footer with buttons
   public VBox getFooter() {
-    Font poppinsRegular = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"), 18);
+    Font poppinsRegular =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"),
+            18);
 
     // New Game Button
     Button newGameButton = new Button("New Game");
     newGameButton.setFont(poppinsRegular);
-    newGameButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
-    newGameButton.setOnAction(event -> {
-      startGame();
-      requestFocus(); // Ensure focus returns to the grid after button click
-      gameOverLabel.setVisible(false);
-    });
+    newGameButton.setStyle(
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
+    newGameButton.setOnAction(
+        event -> {
+          startGame();
+          requestFocus(); // Ensure focus returns to the grid after button click
+          gameOverLabel.setVisible(false);
+        });
 
     // Exit Game Button
     Button exitGameButton = new Button("Exit Game");
     exitGameButton.setFont(poppinsRegular);
-    exitGameButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
+    exitGameButton.setStyle(
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
     exitGameButton.setOnAction(event -> System.exit(0));
 
     HBox buttonContainer = new HBox(10, newGameButton, exitGameButton);
@@ -183,7 +202,7 @@ public class Game2048 extends GridPane {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
         if (board[row][col] == 0) {
-          emptySpaces.add(new int[]{row, col});
+          emptySpaces.add(new int[] {row, col});
         }
       }
     }
@@ -337,8 +356,10 @@ public class Game2048 extends GridPane {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
         if (board[row][col] == 0) return; // Empty space exists
-        if (row < SIZE - 1 && board[row][col] == board[row + 1][col]) return; // Mergeable vertically
-        if (col < SIZE - 1 && board[row][col] == board[row][col + 1]) return; // Mergeable horizontally
+        if (row < SIZE - 1 && board[row][col] == board[row + 1][col])
+          return; // Mergeable vertically
+        if (col < SIZE - 1 && board[row][col] == board[row][col + 1])
+          return; // Mergeable horizontally
       }
     }
     gameOverLabel.setVisible(true);

@@ -36,7 +36,7 @@ public class Model {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
         if (board[row][col] == 0) {
-          emptySpaces.add(new int[]{row, col});
+          emptySpaces.add(new int[] {row, col});
         }
       }
     }

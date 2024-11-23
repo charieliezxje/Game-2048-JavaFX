@@ -24,7 +24,10 @@ public class View extends GridPane {
   }
 
   public void setupGrid() {
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 30);
+    Font poppinsBold =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"),
+            30);
 
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
@@ -45,17 +48,20 @@ public class View extends GridPane {
   }
 
   public HBox getHeader() {
-    Font poppinsBold = Font.loadFont(getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"), 32);
+    Font poppinsBold =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"),
+            32);
 
     Label titleLabel = new Label("2048 Game");
     titleLabel.setFont(poppinsBold);
     titleLabel.setStyle(
-      "-fx-font-size: 32px; " +
-        "-fx-background-color: #edc22e; " +
-        "-fx-text-fill: white; " +
-        "-fx-padding: 15; " +
-        "-fx-border-radius: 15; " +
-        "-fx-background-radius: 15;");
+        "-fx-font-size: 32px; "
+            + "-fx-background-color: #edc22e; "
+            + "-fx-text-fill: white; "
+            + "-fx-padding: 15; "
+            + "-fx-border-radius: 15; "
+            + "-fx-background-radius: 15;");
 
     HBox header = new HBox(20, titleLabel, scoreLabel, bestScoreLabel);
     header.setAlignment(Pos.CENTER_LEFT);

@@ -11,8 +11,8 @@ public class Main extends Application {
     Game2048 game = new Game2048();
 
     BorderPane root = new BorderPane();
-    root.setTop(game.getHeader());    // Add header
-    root.setCenter(game);             // Add game grid
+    root.setTop(game.getHeader()); // Add header
+    root.setCenter(game); // Add game grid
     root.setBottom(game.getFooter()); // Add footer
 
     Scene scene = new Scene(root, 550, 700);
@@ -25,7 +25,7 @@ public class Main extends Application {
     primaryStage.show();
 
     game.requestFocus(); // Focus on the game grid
-    game.startGame();    // Start the game
+    game.startGame(); // Start the game
   }
 
   public static void main(String[] args) {
