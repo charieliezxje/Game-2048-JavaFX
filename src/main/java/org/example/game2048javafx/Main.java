@@ -38,14 +38,24 @@ public class Main extends Application {
    */
   private void showWelcomeScene(Stage stage) {
     VBox welcomeLayout = new VBox(20);
+    Font poppinsBold =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Bold.ttf"),
+            40);
+    Font poppinsRegular =
+        Font.loadFont(
+            getClass().getResourceAsStream("/org/example/game2048javafx/fonts/Poppins-Regular.ttf"),
+            20);
+
     welcomeLayout.setStyle(
         "-fx-padding: 20; -fx-alignment: center; -fx-background-color: #bbada0;");
 
     Text title = new Text("Welcome to 2048!");
-    title.setFont(Font.font("Poppins", 40));
+    title.setFont(poppinsBold);
     title.setStyle("-fx-font-family: 'Poppins'; -fx-fill: #736352; -fx-font-weight: bold;");
 
     Button startButton = new Button("Start Game");
+    startButton.setFont(poppinsRegular);
     startButton.setStyle(
         "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
     startButton.setOnAction(event -> showGameScene(stage));
@@ -64,6 +74,7 @@ public class Main extends Application {
     instructionsButton.setStyle(
         "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
     instructionsButton.setOnAction(event -> showInstructionsScene(stage));
+    instructionsButton.setFont(poppinsRegular);
 
     instructionsButton.setOnMouseEntered(
         event ->
@@ -93,7 +104,7 @@ public class Main extends Application {
         "-fx-padding: 20; -fx-alignment: center; -fx-background-color: #bbada0;");
 
     Text instructionsTitle = new Text("How to Play 2048");
-    instructionsTitle.setFont(Font.font("Poppins", 30));
+    instructionsTitle.setFont(Font.font("Poppins", 40));
     instructionsTitle.setStyle(
         "-fx-font-family: 'Poppins'; -fx-fill: #736352; -fx-font-weight: bold;");
 
