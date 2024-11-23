@@ -67,6 +67,8 @@ The 2048 game is a single-player sliding block puzzle game where the player comb
 
 Combine tiles with the same value to create a tile with the value **2048** or higher. The game ends when no valid moves are left.
 
+> **Note:** The game can be won by creating a tile with the value **2048** or higher. The player can continue playing even after reaching the 2048 tile.
+
 ### Controls
 
 - **Arrow Keys**:
@@ -158,7 +160,7 @@ The game is styled with modern aesthetics, featuring:
 - Proper alignment of header (title, score, and best score).
 - Button styles with hover effects.
 
-Color Codes for Tiles:
+**Color Codes for Tiles:**
 - `2`: Light cream (`#eee4da`)
 - `4`: Pale beige (`#ede0c8`)
 - `8`: Light orange (`#f2b179`)
@@ -240,11 +242,13 @@ Feel free to contribute to this project! Open issues, submit pull requests, or s
    ```bash
    git add .
    git commit -m "Add your message here"
-   git push origin feature-branch-name
+   git push origin feature/feature-branch-name
    ```
 
 4. **Submit a Pull Request**:
   - Open a pull request on GitHub describing your changes.
+
+5. **We will review your PR** and merge it if it meets the project's guidelines!
 
 ## License
 
