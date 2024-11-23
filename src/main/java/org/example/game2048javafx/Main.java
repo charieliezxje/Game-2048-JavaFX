@@ -11,22 +11,35 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+/** Main class to launch the 2048 game */
 public class Main extends Application {
 
+  /**
+   * The start method is called after the init method has returned, and after the system is ready
+   * for the application to begin running.
+   *
+   * @param primaryStage The primary stage for this application, onto which the application scene
+   *     can be set.
+   */
   @Override
   public void start(Stage primaryStage) {
     // Set the favicon
-    primaryStage.getIcons().add(
-      new Image(Objects.requireNonNull(getClass().getResourceAsStream("/favicon.png")))
-    );
+    primaryStage
+        .getIcons()
+        .add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/favicon.png"))));
 
     showWelcomeScene(primaryStage);
   }
 
+  /**
+   * Shows the welcome scene of the game
+   *
+   * @param stage The stage to show the welcome scene on
+   */
   private void showWelcomeScene(Stage stage) {
     VBox welcomeLayout = new VBox(20);
     welcomeLayout.setStyle(
-      "-fx-padding: 20; -fx-alignment: center; -fx-background-color: #bbada0;");
+        "-fx-padding: 20; -fx-alignment: center; -fx-background-color: #bbada0;");
 
     Text title = new Text("Welcome to 2048!");
     title.setFont(Font.font("Poppins", 40));
@@ -34,17 +47,17 @@ public class Main extends Application {
 
     Button startButton = new Button("Start Game");
     startButton.setStyle(
-      "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
     startButton.setOnAction(event -> showGameScene(stage));
 
     startButton.setOnMouseEntered(
-      event ->
-        startButton.setStyle(
-          "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins'; -fx-cursor: hand;"));
+        event ->
+            startButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins'; -fx-cursor: hand;"));
     startButton.setOnMouseExited(
-      event ->
-        startButton.setStyle(
-          "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
+        event ->
+            startButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
 
     welcomeLayout.getChildren().addAll(title, startButton);
     Scene welcomeScene = new Scene(welcomeLayout, 550, 700);
@@ -54,6 +67,11 @@ public class Main extends Application {
     stage.show();
   }
 
+  /**
+   * Shows the game scene of the game
+   *
+   * @param stage The stage to show the game scene on
+   */
   private void showGameScene(Stage stage) {
     Game2048 game = new Game2048();
 
@@ -64,8 +82,8 @@ public class Main extends Application {
 
     Scene gameScene = new Scene(root, 550, 700);
     gameScene
-      .getStylesheets()
-      .add(getClass().getResource("styles.css").toExternalForm()); // Load CSS
+        .getStylesheets()
+        .add(getClass().getResource("styles.css").toExternalForm()); // Load CSS
 
     gameScene.setOnKeyPressed(event -> game.fireEvent(event)); // Ensure focus remains on grid
 
@@ -77,6 +95,11 @@ public class Main extends Application {
     game.startGame(); // Start the game
   }
 
+  /**
+   * Shows the losing scene of the game
+   *
+   * @param stage The stage to show the losing scene on
+   */
   private void showLosingScene(Stage stage) {
     VBox losingLayout = new VBox(20);
     losingLayout.setStyle("-fx-background-color: #bbada0; -fx-padding: 20; -fx-alignment: center;");
@@ -87,12 +110,12 @@ public class Main extends Application {
 
     Button retryButton = new Button("Retry");
     retryButton.setStyle(
-      "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10;");
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10;");
     retryButton.setOnAction(event -> showGameScene(stage));
 
     Button exitButton = new Button("Exit");
     exitButton.setStyle(
-      "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10;");
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10;");
     exitButton.setOnAction(event -> System.exit(0));
 
     losingLayout.getChildren().addAll(losingText, retryButton, exitButton);
@@ -102,6 +125,13 @@ public class Main extends Application {
     stage.setTitle("2048 - Game Over");
   }
 
+  /**
+   * The main method is ignored in JavaFX applications. main serves only as a fallback in case the
+   * application can not be launched through deployment artifacts, e.g., in IDEs with limited FX
+   * support. NetBeans ignores main.
+   *
+   * @param args the command line arguments
+   */
   public static void main(String[] args) {
     launch(args);
   }

@@ -16,19 +16,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/** View class to represent the view of the game */
 public class Game2048 extends GridPane {
+  /** SIZE constant to represent the size of the grid */
   private final int SIZE = 4;
+
+  /** 2D array to represent the tiles in the grid */
   private final int[][] board = new int[SIZE][SIZE];
+
+  /** 2D array to represent the tiles in the grid */
   private final StackPane[][] tiles = new StackPane[SIZE][SIZE];
 
+  /** The current score of the game */
   private int score = 0;
+
+  /** The best score achieved in the game */
   private int bestScore = 0;
 
+  /** Label to display the current score */
   private final Label scoreLabel = new Label("SCORE: 0");
+
+  /** Label to display the best score */
   private final Label bestScoreLabel = new Label("BEST: 0");
+
+  /** Label to display the footer message */
   private final Label footerLabel = new Label("Join the numbers and get to the 2048 tile!");
+
+  /** Label to display the game over message */
   private final Label gameOverLabel = new Label("Game Over! Try Again?");
 
+  /** Constructor for the View class */
   public Game2048() {
     setHgap(10);
     setVgap(10);
@@ -93,7 +110,11 @@ public class Game2048 extends GridPane {
         });
   }
 
-  // Create the header (title and scores)
+  /**
+   * Get the header of the game
+   *
+   * @return HBox object representing the header
+   */
   public HBox getHeader() {
     Font poppinsBold =
         Font.loadFont(
@@ -146,7 +167,11 @@ public class Game2048 extends GridPane {
     return header;
   }
 
-  // Create the footer with buttons
+  /**
+   * Get the footer of the game
+   *
+   * @return Label object representing the footer
+   */
   public VBox getFooter() {
     Font poppinsRegular =
         Font.loadFont(
@@ -198,7 +223,7 @@ public class Game2048 extends GridPane {
     return footer;
   }
 
-  // Start the game
+  /** Starts the game by resetting the board and adding two random tiles */
   public void startGame() {
     resetBoard();
     addRandomTile();
@@ -206,6 +231,7 @@ public class Game2048 extends GridPane {
     updateUI();
   }
 
+  /** Resets the game board and score */
   private void resetBoard() {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
@@ -216,6 +242,7 @@ public class Game2048 extends GridPane {
     updateScores();
   }
 
+  /** Adds a random tile (either 2 or 4) to an empty space on the board */
   private void addRandomTile() {
     List<int[]> emptySpaces = new ArrayList<>();
     for (int row = 0; row < SIZE; row++) {
@@ -233,6 +260,7 @@ public class Game2048 extends GridPane {
     }
   }
 
+  /** Update the UI with the new board and score */
   private void updateUI() {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
@@ -253,6 +281,7 @@ public class Game2048 extends GridPane {
     }
   }
 
+  /** Update the UI with the new board and score with animations */
   private void updateUIWithAnimations() {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
@@ -280,6 +309,11 @@ public class Game2048 extends GridPane {
     }
   }
 
+  /**
+   * Get the scene from the current stage
+   *
+   * @return Scene object representing the current scene
+   */
   private String getTileColor(int value) {
     return switch (value) {
       case 2 -> "#eee4da";
@@ -293,10 +327,17 @@ public class Game2048 extends GridPane {
       case 512 -> "#edc850";
       case 1024 -> "#edc53f";
       case 2048 -> "#edc22e";
+      case 4096 -> "#3e3933";
       default -> "#3c3a32";
     };
   }
 
+  /**
+   * Moves the tiles in the specified direction and merges them if possible
+   *
+   * @param direction The direction to move the tiles
+   * @return boolean value indicating if the move was successful
+   */
   private boolean move(String direction) {
     boolean moved = false;
 
@@ -314,6 +355,12 @@ public class Game2048 extends GridPane {
     return moved;
   }
 
+  /**
+   * Merges the tiles in a line
+   *
+   * @param line The line of tiles to merge
+   * @return The merged line of tiles
+   */
   private int[] getLine(String direction, int index) {
     int[] line = new int[SIZE];
     for (int i = 0; i < SIZE; i++) {
@@ -327,6 +374,13 @@ public class Game2048 extends GridPane {
     return line;
   }
 
+  /**
+   * Sets a line of tiles on the board in the specified direction
+   *
+   * @param direction The direction to set the line
+   * @param index The index of the line
+   * @param line The line of tiles to set
+   */
   private void setLine(String direction, int index, int[] line) {
     for (int i = 0; i < SIZE; i++) {
       switch (direction) {
@@ -338,6 +392,12 @@ public class Game2048 extends GridPane {
     }
   }
 
+  /**
+   * Merges the tiles in a line if possible
+   *
+   * @param line The line of tiles to merge
+   * @return The merged line of tiles
+   */
   private int[] mergeLine(int[] line) {
     int[] merged = new int[SIZE];
     int pos = 0;
@@ -356,6 +416,13 @@ public class Game2048 extends GridPane {
     return merged;
   }
 
+  /**
+   * Checks if two arrays are equal
+   *
+   * @param a The first array
+   * @param b The second array
+   * @return boolean value indicating if the arrays are equal
+   */
   private boolean arrayEquals(int[] a, int[] b) {
     for (int i = 0; i < SIZE; i++) {
       if (a[i] != b[i]) return false;
@@ -363,6 +430,7 @@ public class Game2048 extends GridPane {
     return true;
   }
 
+  /** Updates the scores on the UI */
   private void updateScores() {
     scoreLabel.setText("SCORE: " + score);
     if (score > bestScore) {
@@ -371,6 +439,7 @@ public class Game2048 extends GridPane {
     }
   }
 
+  /** Checks if the game is over */
   private void checkGameOver() {
     for (int row = 0; row < SIZE; row++) {
       for (int col = 0; col < SIZE; col++) {
@@ -384,6 +453,7 @@ public class Game2048 extends GridPane {
     gameOverLabel.setVisible(true);
   }
 
+  /** Shows the losing scene */
   private void showLosingScene() {
     // Create a VBox for the losing screen
     VBox losingScreen = new VBox(20);
@@ -398,18 +468,19 @@ public class Game2048 extends GridPane {
     // Retry button
     Button retryButton = new Button("Retry");
     retryButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white;");
-    retryButton.setOnAction(event -> {
-      startGame(); // Restart the game
-      // Set the root back to the game layout
-      Scene currentScene = getScene();
-      if (currentScene != null) {
-        BorderPane mainLayout = new BorderPane(); // Create a new layout container for the game
-        mainLayout.setTop(getHeader());          // Add header to the top
-        mainLayout.setCenter(this);              // Add the game grid (this) to the center
-        mainLayout.setBottom(getFooter());       // Add footer to the bottom
-        currentScene.setRoot(mainLayout);        // Set the root of the scene back to the game layout
-      }
-    });
+    retryButton.setOnAction(
+        event -> {
+          startGame(); // Restart the game
+          // Set the root back to the game layout
+          Scene currentScene = getScene();
+          if (currentScene != null) {
+            BorderPane mainLayout = new BorderPane(); // Create a new layout container for the game
+            mainLayout.setTop(getHeader()); // Add header to the top
+            mainLayout.setCenter(this); // Add the game grid (this) to the center
+            mainLayout.setBottom(getFooter()); // Add footer to the bottom
+            currentScene.setRoot(mainLayout); // Set the root of the scene back to the game layout
+          }
+        });
 
     // Exit button
     Button exitButton = new Button("Exit");
