@@ -46,6 +46,14 @@ The 2048 game is a single-player sliding block puzzle game where the player comb
 
 ## Preview
 
+### Welcome Screen
+
+<p align="center">
+  <img src="img/welcome.png" alt="2048 Game in JavaFX" width="70%" style="border-radius: 8px">
+</p>
+
+### Game Interface
+
 <p align="center">
   <img src="img/ui.png" alt="2048 Game in JavaFX" width="70%" style="border-radius: 8px">
 </p>

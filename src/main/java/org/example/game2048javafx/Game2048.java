@@ -2,6 +2,7 @@ package org.example.game2048javafx;
 
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -50,6 +51,7 @@ public class Game2048 extends GridPane {
     gameOverLabel.setFont(poppinsBold);
     gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 24px; -fx-font-family: 'Poppins';");
     gameOverLabel.setVisible(false);
+    gameOverLabel.setId("gameOverLabel");
 
     // Initialize grid tiles
     for (int row = 0; row < SIZE; row++) {
@@ -115,7 +117,7 @@ public class Game2048 extends GridPane {
 
     // Score Box
     scoreLabel.setStyle(
-        "-fx-font-size: 20px; "
+        "-fx-font-size: 19px; "
             + "-fx-background-color: #eee4da; "
             + "-fx-text-fill: #333333; "
             + "-fx-padding: 10; "
@@ -127,7 +129,7 @@ public class Game2048 extends GridPane {
 
     // Best Score Box
     bestScoreLabel.setStyle(
-        "-fx-font-size: 20px; "
+        "-fx-font-size: 19px; "
             + "-fx-background-color: #eee4da; "
             + "-fx-text-fill: #333333; "
             + "-fx-padding: 10; "
@@ -162,6 +164,14 @@ public class Game2048 extends GridPane {
           requestFocus(); // Ensure focus returns to the grid after button click
           gameOverLabel.setVisible(false);
         });
+    newGameButton.setOnMouseEntered(
+        event ->
+            newGameButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;"));
+    newGameButton.setOnMouseExited(
+        event ->
+            newGameButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;"));
 
     // Exit Game Button
     Button exitGameButton = new Button("Exit Game");
@@ -169,6 +179,15 @@ public class Game2048 extends GridPane {
     exitGameButton.setStyle(
         "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;");
     exitGameButton.setOnAction(event -> System.exit(0));
+
+    exitGameButton.setOnMouseEntered(
+        event ->
+            exitGameButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;"));
+    exitGameButton.setOnMouseExited(
+        event ->
+            exitGameButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-background-radius: 15;"));
 
     HBox buttonContainer = new HBox(10, newGameButton, exitGameButton);
     buttonContainer.setAlignment(Pos.CENTER);
@@ -363,5 +382,46 @@ public class Game2048 extends GridPane {
       }
     }
     gameOverLabel.setVisible(true);
+  }
+
+  private void showLosingScene() {
+    // Create a VBox for the losing screen
+    VBox losingScreen = new VBox(20);
+    losingScreen.setAlignment(Pos.CENTER);
+    losingScreen.setStyle("-fx-background-color: #bbada0; -fx-padding: 50;");
+
+    // Losing message
+    Label losingMessage = new Label("Game Over!");
+    losingMessage.setFont(new Font("Arial", 36));
+    losingMessage.setTextFill(Color.WHITE);
+
+    // Retry button
+    Button retryButton = new Button("Retry");
+    retryButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white;");
+    retryButton.setOnAction(event -> {
+      startGame(); // Restart the game
+      // Set the root back to the game layout
+      Scene currentScene = getScene();
+      if (currentScene != null) {
+        BorderPane mainLayout = new BorderPane(); // Create a new layout container for the game
+        mainLayout.setTop(getHeader());          // Add header to the top
+        mainLayout.setCenter(this);              // Add the game grid (this) to the center
+        mainLayout.setBottom(getFooter());       // Add footer to the bottom
+        currentScene.setRoot(mainLayout);        // Set the root of the scene back to the game layout
+      }
+    });
+
+    // Exit button
+    Button exitButton = new Button("Exit");
+    exitButton.setStyle("-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white;");
+    exitButton.setOnAction(event -> System.exit(0));
+
+    losingScreen.getChildren().addAll(losingMessage, retryButton, exitButton);
+
+    // Get the scene from the current stage and replace the root with the losing screen
+    Scene currentScene = getScene();
+    if (currentScene != null) {
+      currentScene.setRoot(losingScreen);
+    }
   }
 }

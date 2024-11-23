@@ -10,12 +10,22 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/** View class to represent the view of the game */
 public class View extends GridPane {
+
+  /** SIZE constant to represent the size of the grid */
   private final int SIZE = 4;
+
+  /** 2D array to represent the tiles in the grid */
   private final StackPane[][] tiles = new StackPane[SIZE][SIZE];
+
+  /** Label to display the current score */
   private final Label scoreLabel = new Label("SCORE: 0");
+
+  /** Label to display the best score */
   private final Label bestScoreLabel = new Label("BEST: 0");
 
+  /** Constructor for the View class */
   public View() {
     setHgap(10);
     setVgap(10);
@@ -23,6 +33,7 @@ public class View extends GridPane {
     setStyle("-fx-padding: 10; -fx-background-color: #bbada0;");
   }
 
+  /** Setup the grid with the tiles */
   public void setupGrid() {
     Font poppinsBold =
         Font.loadFont(
@@ -47,6 +58,11 @@ public class View extends GridPane {
     }
   }
 
+  /**
+   * Get the header of the game
+   *
+   * @return HBox object representing the header
+   */
   public HBox getHeader() {
     Font poppinsBold =
         Font.loadFont(
@@ -68,10 +84,22 @@ public class View extends GridPane {
     return header;
   }
 
+  /**
+   * Get the footer of the game
+   *
+   * @return Label object representing the footer
+   */
   public Label getFooter() {
     return new Label("Join the numbers and get to the 2048 tile!");
   }
 
+  /**
+   * Update the UI with the new board and score
+   *
+   * @param board The 2D array representing the game board
+   * @param score The current score of the game
+   * @param bestScore The best score achieved in the game
+   */
   public void updateUI(int[][] board, int score, int bestScore) {
     scoreLabel.setText("SCORE: " + score);
     bestScoreLabel.setText("BEST: " + bestScore);
