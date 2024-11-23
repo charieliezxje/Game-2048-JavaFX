@@ -66,7 +66,7 @@ public class Game2048 extends GridPane {
     footerLabel.setFont(poppinsRegular);
     footerLabel.setStyle("-fx-text-fill: #776e65; -fx-font-family: 'Poppins';");
     gameOverLabel.setFont(poppinsBold);
-    gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 24px; -fx-font-family: 'Poppins';");
+    gameOverLabel.setStyle("-fx-text-fill: red; -fx-font-size: 23px; -fx-font-family: 'Poppins';");
     gameOverLabel.setVisible(false);
     gameOverLabel.setId("gameOverLabel");
 

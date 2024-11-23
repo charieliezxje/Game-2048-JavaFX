@@ -43,6 +43,9 @@ The 2048 game is a single-player sliding block puzzle game where the player comb
 - **Intelligent Animations**:
   - Smooth scaling animations for tile appearances and merges.
   - Dynamic color updates based on tile values.
+- **Build Automation**:
+  - Maven project configuration for easy setup and dependency management.
+  - JUnit testing for validating game logic and state transitions.
 
 ## Preview
 
