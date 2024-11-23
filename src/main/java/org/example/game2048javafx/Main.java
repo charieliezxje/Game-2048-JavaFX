@@ -43,7 +43,7 @@ public class Main extends Application {
 
     Text title = new Text("Welcome to 2048!");
     title.setFont(Font.font("Poppins", 40));
-    title.setStyle("-fx-font-family: 'Poppins'; -fx-text-fill: #edc22e;");
+    title.setStyle("-fx-font-family: 'Poppins'; -fx-fill: #736352; -fx-font-weight: bold;");
 
     Button startButton = new Button("Start Game");
     startButton.setStyle(
@@ -59,12 +59,90 @@ public class Main extends Application {
             startButton.setStyle(
                 "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
 
-    welcomeLayout.getChildren().addAll(title, startButton);
+    // Instructions Button
+    Button instructionsButton = new Button("Instructions");
+    instructionsButton.setStyle(
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
+    instructionsButton.setOnAction(event -> showInstructionsScene(stage));
+
+    instructionsButton.setOnMouseEntered(
+        event ->
+            instructionsButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins'; -fx-cursor: hand;"));
+    instructionsButton.setOnMouseExited(
+        event ->
+            instructionsButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
+
+    welcomeLayout.getChildren().addAll(title, startButton, instructionsButton);
     Scene welcomeScene = new Scene(welcomeLayout, 550, 700);
 
     stage.setScene(welcomeScene);
     stage.setTitle("2048 - Welcome");
     stage.show();
+  }
+
+  /**
+   * Shows the instructions scene of the game
+   *
+   * @param stage The stage to show the instructions on
+   */
+  private void showInstructionsScene(Stage stage) {
+    VBox instructionsLayout = new VBox(20);
+    instructionsLayout.setStyle(
+        "-fx-padding: 20; -fx-alignment: center; -fx-background-color: #bbada0;");
+
+    Text instructionsTitle = new Text("How to Play 2048");
+    instructionsTitle.setFont(Font.font("Poppins", 30));
+    instructionsTitle.setStyle(
+        "-fx-font-family: 'Poppins'; -fx-fill: #736352; -fx-font-weight: bold;");
+
+    Text instructionsText =
+        new Text(
+            "1. Use arrow keys to move tiles up, down, left, or right.\n"
+                + "2. Tiles with the same number merge into one when they touch.\n"
+                + "3. Your goal is to reach the 2048 tile!\n"
+                + "4. The game ends when there are no valid moves left.\n"
+                + "5. Press 'Start Game' to begin playing!");
+    instructionsText.setFont(Font.font("Poppins", 20));
+    instructionsText.setStyle("-fx-font-family: 'Poppins'; -fx-fill: black;");
+    instructionsText.setWrappingWidth(500);
+
+    Button backButton = new Button("Back to Welcome");
+    backButton.setStyle(
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
+    backButton.setOnAction(event -> showWelcomeScene(stage));
+
+    backButton.setOnMouseEntered(
+        event ->
+            backButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins'; -fx-cursor: hand;"));
+    backButton.setOnMouseExited(
+        event ->
+            backButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
+
+    Button startButton = new Button("Start Game");
+    startButton.setStyle(
+        "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';");
+    startButton.setOnAction(event -> showGameScene(stage));
+
+    startButton.setOnMouseEntered(
+        event ->
+            startButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #736352; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins'; -fx-cursor: hand;"));
+    startButton.setOnMouseExited(
+        event ->
+            startButton.setStyle(
+                "-fx-padding: 10; -fx-background-color: #8f7a66; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 10; -fx-font-family: 'Poppins';"));
+
+    instructionsLayout
+        .getChildren()
+        .addAll(instructionsTitle, instructionsText, startButton, backButton);
+    Scene instructionsScene = new Scene(instructionsLayout, 550, 700);
+
+    stage.setScene(instructionsScene);
+    stage.setTitle("2048 - Instructions");
   }
 
   /**
